@@ -30,6 +30,17 @@ function scrollTo(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+// ─── Mobile detection ───
+function useIsMobile(breakpoint = 768) {
+  const [mobile, setMobile] = useState(window.innerWidth < breakpoint);
+  useEffect(() => {
+    const h = () => setMobile(window.innerWidth < breakpoint);
+    window.addEventListener("resize", h);
+    return () => window.removeEventListener("resize", h);
+  }, [breakpoint]);
+  return mobile;
+}
+
 // ─── Fade-in on scroll ───
 function useFadeIn() {
   const ref = useRef(null);
@@ -64,6 +75,7 @@ function FadeSection({ children, style, delay = 0 }) {
 // ─── Navigation ───
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const mobile = useIsMobile();
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", h);
@@ -79,21 +91,25 @@ function Nav() {
   return (
     <nav style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-      padding: "0 40px", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between",
+      padding: mobile ? "0 16px" : "0 40px", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between",
       background: scrolled ? `${C.bg}ee` : "transparent",
       backdropFilter: scrolled ? "blur(16px)" : "none",
       borderBottom: scrolled ? `1px solid ${C.border}` : "1px solid transparent",
       transition: "all 0.3s ease",
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-        <span style={{ fontSize: 17, fontFamily: fonts.display, color: C.text, fontWeight: 400, letterSpacing: "-0.01em" }}>
+        <span style={{ fontSize: mobile ? 15 : 17, fontFamily: fonts.display, color: C.text, fontWeight: 400, letterSpacing: "-0.01em" }}>
           Dolores Research
         </span>
       </div>
-      <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
-        <span style={linkStyle} onClick={() => scrollTo("thesis")} onMouseOver={e => e.target.style.color = C.text} onMouseOut={e => e.target.style.color = C.textSoft}>Solutions</span>
-        <span style={linkStyle} onClick={() => scrollTo("work")} onMouseOver={e => e.target.style.color = C.text} onMouseOut={e => e.target.style.color = C.textSoft}>Platform</span>
-        <span style={linkStyle} onClick={() => scrollTo("writing")} onMouseOver={e => e.target.style.color = C.text} onMouseOut={e => e.target.style.color = C.textSoft}>Research</span>
+      <div style={{ display: "flex", gap: mobile ? 16 : 28, alignItems: "center" }}>
+        {!mobile && (
+          <>
+            <span style={linkStyle} onClick={() => scrollTo("thesis")} onMouseOver={e => e.target.style.color = C.text} onMouseOut={e => e.target.style.color = C.textSoft}>Solutions</span>
+            <span style={linkStyle} onClick={() => scrollTo("work")} onMouseOver={e => e.target.style.color = C.text} onMouseOut={e => e.target.style.color = C.textSoft}>Platform</span>
+            <span style={linkStyle} onClick={() => scrollTo("writing")} onMouseOver={e => e.target.style.color = C.text} onMouseOut={e => e.target.style.color = C.textSoft}>Research</span>
+          </>
+        )}
         <a href="mailto:Leonwenhao@gmail.com" style={{
           ...linkStyle, color: C.accent, border: `1px solid ${C.accent}40`,
           padding: "6px 16px", borderRadius: 4, fontSize: 12, letterSpacing: "0.04em",
@@ -109,10 +125,11 @@ function Nav() {
 
 // ─── Hero ───
 function Hero() {
+  const mobile = useIsMobile();
   return (
     <section style={{
       minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center",
-      padding: "120px 40px 80px", maxWidth: 980, margin: "0 auto",
+      padding: mobile ? "100px 20px 60px" : "120px 40px 80px", maxWidth: 980, margin: "0 auto",
       position: "relative",
     }}>
       {/* Subtle grain overlay via CSS */}
@@ -202,8 +219,9 @@ function Hero() {
 
 // ─── Thesis Section ───
 function Thesis() {
+  const mobile = useIsMobile();
   return (
-    <section id="thesis" style={{ padding: "100px 40px", maxWidth: 980, margin: "0 auto" }}>
+    <section id="thesis" style={{ padding: mobile ? "60px 20px" : "100px 40px", maxWidth: 980, margin: "0 auto" }}>
       <FadeSection>
         <span style={{
           fontFamily: fonts.mono, fontSize: 10, color: C.textMuted,
@@ -219,7 +237,7 @@ function Thesis() {
         </h2>
       </FadeSection>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 1, marginTop: 56, background: C.border, borderRadius: 2 }}>
+      <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: 1, marginTop: mobile ? 36 : 56, background: C.border, borderRadius: 2 }}>
         {[
           {
             title: "The Cost Problem",
@@ -258,6 +276,7 @@ function Thesis() {
 
 // ─── Proof Points ───
 function Proof() {
+  const mobile = useIsMobile();
   const stats = [
     { value: "100%", label: "Complete Coverage", sub: "Nothing missed in analysis", context: "FastAPI codebase audit" },
     { value: "53%", label: "Cost Savings", sub: "$0.46 vs $0.99 per analysis", context: "vs frontier model baseline" },
@@ -267,7 +286,7 @@ function Proof() {
 
   return (
     <section style={{
-      padding: "80px 40px", borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`,
+      padding: mobile ? "48px 20px" : "80px 40px", borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`,
     }}>
       <div style={{ maxWidth: 980, margin: "0 auto" }}>
         <FadeSection>
@@ -285,9 +304,9 @@ function Proof() {
           </p>
         </FadeSection>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 1, marginTop: 32, background: C.border }}>
+        <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: 1, marginTop: 32, background: C.border }}>
           {stats.map((s, i) => (
-            <FadeSection key={i} delay={i * 0.07} style={{ background: C.bg, padding: "36px 28px" }}>
+            <FadeSection key={i} delay={i * 0.07} style={{ background: C.bg, padding: mobile ? "24px 20px" : "36px 28px" }}>
               <div style={{
                 fontFamily: fonts.display, fontSize: 44, color: C.accent, fontWeight: 400,
                 letterSpacing: "-0.03em", lineHeight: 1,
@@ -313,8 +332,9 @@ function Proof() {
 
 // ─── Work Section (DeepRepo + RLM Distiller) ───
 function Work() {
+  const mobile = useIsMobile();
   return (
-    <section id="work" style={{ padding: "100px 40px", maxWidth: 980, margin: "0 auto" }}>
+    <section id="work" style={{ padding: mobile ? "60px 20px" : "100px 40px", maxWidth: 980, margin: "0 auto" }}>
       <FadeSection>
         <span style={{
           fontFamily: fonts.mono, fontSize: 10, color: C.textMuted,
@@ -335,7 +355,7 @@ function Work() {
         <FadeSection>
           <a href="https://github.com/Leonwenhao/deeprepo" target="_blank" rel="noopener noreferrer" style={{
             display: "grid", gridTemplateColumns: "1fr auto", alignItems: "start",
-            padding: "40px 36px", background: C.surface, textDecoration: "none",
+            padding: mobile ? "28px 20px" : "40px 36px", background: C.surface, textDecoration: "none",
             cursor: "pointer", transition: "background 0.2s",
           }}
             onMouseOver={e => e.currentTarget.style.background = C.card}
@@ -354,7 +374,7 @@ function Work() {
               }}>
                 Our multi-agent orchestration engine for deep codebase analysis. A frontier model coordinates specialized sub-agents for code review, security audits, and architectural analysis. Available as a CLI tool — deploy it on your own infrastructure.
               </p>
-              <div style={{ display: "flex", gap: 20, marginTop: 16 }}>
+              <div style={{ display: "flex", gap: mobile ? 12 : 20, marginTop: 16, flexWrap: "wrap" }}>
                 {[
                   { k: "Stack", v: "Python, AsyncIO" },
                   { k: "Models", v: "Claude, Qwen, Mistral" },
@@ -374,11 +394,11 @@ function Work() {
         <FadeSection delay={0.08}>
           <div style={{
             display: "grid", gridTemplateColumns: "1fr auto", alignItems: "start",
-            padding: "40px 36px", background: C.surface, cursor: "default",
+            padding: mobile ? "28px 20px" : "40px 36px", background: C.surface, cursor: "default",
           }}>
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
-                <h3 style={{ fontFamily: fonts.display, fontSize: 26, color: C.cream, fontWeight: 400, margin: 0 }}>Autonomous Model Improvement</h3>
+              <div style={{ display: "flex", alignItems: mobile ? "start" : "center", gap: 10, marginBottom: 10, flexWrap: "wrap" }}>
+                <h3 style={{ fontFamily: fonts.display, fontSize: mobile ? 22 : 26, color: C.cream, fontWeight: 400, margin: 0 }}>Autonomous Model Improvement</h3>
                 <span style={{
                   fontFamily: fonts.mono, fontSize: 9, color: C.textMuted, letterSpacing: "0.08em",
                   textTransform: "uppercase", border: `1px solid ${C.border}`, padding: "2px 8px", borderRadius: 2,
@@ -389,7 +409,7 @@ function Work() {
               }}>
                 We ran 7 iterations of autonomous fine-tuning overnight for $44. Orchestration intelligence from Claude was distilled into Mistral Small 24B with zero human intervention. Retry quality improved 77% in a single cycle. This is what we do for your models.
               </p>
-              <div style={{ display: "flex", gap: 20, marginTop: 16 }}>
+              <div style={{ display: "flex", gap: mobile ? 12 : 20, marginTop: 16, flexWrap: "wrap" }}>
                 {[
                   { k: "Method", v: "QLoRA + Self-Improvement Loop" },
                   { k: "Runtime", v: "7h 27m autonomous" },
@@ -409,11 +429,11 @@ function Work() {
         <FadeSection delay={0.16}>
           <div style={{
             display: "grid", gridTemplateColumns: "1fr auto", alignItems: "start",
-            padding: "40px 36px", background: C.surface,
+            padding: mobile ? "28px 20px" : "40px 36px", background: C.surface,
           }}>
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
-                <h3 style={{ fontFamily: fonts.display, fontSize: 26, color: C.cream, fontWeight: 400, margin: 0 }}>Security Audit Benchmark</h3>
+              <div style={{ display: "flex", alignItems: mobile ? "start" : "center", gap: 10, marginBottom: 10, flexWrap: "wrap" }}>
+                <h3 style={{ fontFamily: fonts.display, fontSize: mobile ? 22 : 26, color: C.cream, fontWeight: 400, margin: 0 }}>Security Audit Benchmark</h3>
                 <span style={{
                   fontFamily: fonts.mono, fontSize: 9, color: C.textMuted, letterSpacing: "0.08em",
                   textTransform: "uppercase", border: `1px solid ${C.border}`, padding: "2px 8px", borderRadius: 2,
@@ -435,8 +455,9 @@ function Work() {
 
 // ─── Writing Section ───
 function Writing() {
+  const mobile = useIsMobile();
   return (
-    <section id="writing" style={{ padding: "100px 40px", maxWidth: 980, margin: "0 auto" }}>
+    <section id="writing" style={{ padding: mobile ? "60px 20px" : "100px 40px", maxWidth: 980, margin: "0 auto" }}>
       <FadeSection>
         <span style={{
           fontFamily: fonts.mono, fontSize: 10, color: C.textMuted,
@@ -457,7 +478,7 @@ function Writing() {
           href="https://leonliu.substack.com/p/post-training-is-just-dog-training"
           target="_blank" rel="noopener noreferrer"
           style={{
-            display: "block", padding: "36px 36px", background: C.surface,
+            display: "block", padding: mobile ? "24px 20px" : "36px 36px", background: C.surface,
             border: `1px solid ${C.border}`, borderRadius: 2, textDecoration: "none",
             transition: "border-color 0.2s, background 0.2s",
           }}
@@ -491,7 +512,7 @@ function Writing() {
           href="https://leonliu.substack.com/"
           target="_blank" rel="noopener noreferrer"
           style={{
-            display: "block", marginTop: 1, padding: "20px 36px", background: C.surface,
+            display: "block", marginTop: 1, padding: mobile ? "16px 20px" : "20px 36px", background: C.surface,
             border: `1px solid ${C.border}`, borderRadius: 2, textDecoration: "none",
             transition: "border-color 0.2s",
           }}
@@ -512,14 +533,15 @@ function Writing() {
 
 // ─── Contact / Footer ───
 function Footer() {
+  const mobile = useIsMobile();
   return (
     <footer style={{
-      padding: "80px 40px 48px",
+      padding: mobile ? "48px 20px 36px" : "80px 40px 48px",
       borderTop: `1px solid ${C.border}`,
     }}>
       <div style={{ maxWidth: 980, margin: "0 auto" }}>
         <FadeSection>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, marginBottom: 80 }}>
+          <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: mobile ? 32 : 60, marginBottom: mobile ? 48 : 80 }}>
             <div>
               <h2 style={{
                 fontFamily: fonts.display, fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 400,
