@@ -91,9 +91,9 @@ function Nav() {
         </span>
       </div>
       <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
-        <span style={linkStyle} onClick={() => scrollTo("thesis")} onMouseOver={e => e.target.style.color = C.text} onMouseOut={e => e.target.style.color = C.textSoft}>Thesis</span>
-        <span style={linkStyle} onClick={() => scrollTo("work")} onMouseOver={e => e.target.style.color = C.text} onMouseOut={e => e.target.style.color = C.textSoft}>Work</span>
-        <span style={linkStyle} onClick={() => scrollTo("writing")} onMouseOver={e => e.target.style.color = C.text} onMouseOut={e => e.target.style.color = C.textSoft}>Writing</span>
+        <span style={linkStyle} onClick={() => scrollTo("thesis")} onMouseOver={e => e.target.style.color = C.text} onMouseOut={e => e.target.style.color = C.textSoft}>Solutions</span>
+        <span style={linkStyle} onClick={() => scrollTo("work")} onMouseOver={e => e.target.style.color = C.text} onMouseOut={e => e.target.style.color = C.textSoft}>Platform</span>
+        <span style={linkStyle} onClick={() => scrollTo("writing")} onMouseOver={e => e.target.style.color = C.text} onMouseOut={e => e.target.style.color = C.textSoft}>Research</span>
         <a href="mailto:Leonwenhao@gmail.com" style={{
           ...linkStyle, color: C.accent, border: `1px solid ${C.accent}40`,
           padding: "6px 16px", borderRadius: 4, fontSize: 12, letterSpacing: "0.04em",
@@ -138,7 +138,7 @@ function Hero() {
           color: C.cream, lineHeight: 1.08, letterSpacing: "-0.025em",
           margin: "0 0 28px", maxWidth: 820,
         }}>
-          We make cheap models <br />behave like expensive ones.
+          Enterprise AI orchestration. <br />Frontier quality. Open-source economics.
         </h1>
       </FadeSection>
 
@@ -147,13 +147,13 @@ function Hero() {
           fontFamily: fonts.body, fontSize: 18, color: C.textSoft, lineHeight: 1.7,
           margin: "0 0 48px", maxWidth: 600, fontWeight: 400,
         }}>
-          Dolores Research is a post-training company. We take open-source models from Qwen, DeepSeek, and Mistral and fine-tune them for enterprise multi-agent orchestration, closing the behavioral gap with frontier models at a fraction of the cost.
+          We fine-tune open-source models — Qwen, DeepSeek, Mistral — to run multi-agent workflows with the quality of frontier models at a fraction of the cost. Your orchestration, your infrastructure, our post-training expertise.
         </p>
       </FadeSection>
 
       <FadeSection delay={0.3}>
         <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-          <a href="https://github.com/Leonwenhao/deeprepo" target="_blank" rel="noopener noreferrer" style={{
+          <a href="mailto:Leonwenhao@gmail.com" style={{
             display: "inline-flex", alignItems: "center", gap: 8,
             padding: "12px 24px", background: C.accent, color: C.bg,
             fontFamily: fonts.body, fontSize: 14, fontWeight: 600, borderRadius: 4,
@@ -163,20 +163,19 @@ function Hero() {
             onMouseOver={e => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = `0 6px 24px ${C.accent}30`; }}
             onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
           >
-            View DeepRepo on GitHub →
+            Get in Touch →
           </a>
-          <span style={{
+          <a href="https://github.com/Leonwenhao/deeprepo" target="_blank" rel="noopener noreferrer" style={{
             display: "inline-flex", alignItems: "center", gap: 8,
             padding: "12px 24px", border: `1px solid ${C.border}`, color: C.textSoft,
             fontFamily: fonts.body, fontSize: 14, fontWeight: 500, borderRadius: 4,
-            cursor: "pointer", transition: "border-color 0.2s",
+            textDecoration: "none", cursor: "pointer", transition: "border-color 0.2s",
           }}
-            onClick={() => scrollTo("thesis")}
             onMouseOver={e => e.currentTarget.style.borderColor = C.textMuted}
             onMouseOut={e => e.currentTarget.style.borderColor = C.border}
           >
-            Read our thesis
-          </span>
+            View DeepRepo on GitHub
+          </a>
         </div>
       </FadeSection>
 
@@ -210,33 +209,33 @@ function Thesis() {
           fontFamily: fonts.mono, fontSize: 10, color: C.textMuted,
           letterSpacing: "0.14em", textTransform: "uppercase",
         }}>
-          01 — Thesis
+          01 — The Problem We Solve
         </span>
         <h2 style={{
           fontFamily: fonts.display, fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 400,
           color: C.cream, lineHeight: 1.15, margin: "16px 0 0", letterSpacing: "-0.02em",
         }}>
-          The behavioral gap between frontier and mid-tier models is measurable, reproducible, and trainable.
+          You need agentic AI at scale. Frontier models are too expensive. Open-source models aren't ready. We close the gap.
         </h2>
       </FadeSection>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 1, marginTop: 56, background: C.border, borderRadius: 2 }}>
         {[
           {
-            title: "The Problem",
-            body: "Claude Opus dispatches 61 sub-agent calls on a codebase analysis. Claude Sonnet dispatches 9 on the same task. This isn't a capability gap. It's a strategy gap: when to delegate, when to retry, how to synthesize. And strategy can be taught.",
+            title: "The Cost Problem",
+            body: "Frontier models like GPT-4 and Claude Opus deliver excellent agentic behavior but cost $15–75 per million tokens. At scale, orchestrating dozens of sub-agent calls per task makes this unsustainable. You need frontier-quality orchestration at open-source prices.",
           },
           {
-            title: "The Approach",
-            body: "We capture orchestration traces from frontier models and distill them into open-source models via supervised fine-tuning and autonomous self-improvement loops. The result: models that cost 30x less but orchestrate with comparable depth.",
+            title: "The Behavior Problem",
+            body: "Open-source models are cheap but they don't orchestrate well out of the box. They stop too early, skip retries, give shallow analysis. The gap isn't capability — it's learned behavior. And behavior can be trained.",
           },
           {
-            title: "The Flywheel",
-            body: "Agency work generates training environments. Training environments become proprietary assets. Assets improve deployed systems and attract more clients. Every engagement makes the next one better.",
+            title: "What We Deliver",
+            body: "We fine-tune open-source models specifically for your orchestration workflows. Our post-training pipeline captures expert behavior from frontier models and transfers it into models you can self-host. You get the depth of a $15/1M-token model at $0.50/1M-token.",
           },
           {
-            title: "The Market",
-            body: "Enterprises want agentic AI but can't justify frontier model costs at scale. We deliver the orchestration quality of a $15/1K-token model at $0.50/1K-token, self-hosted. Chinese AI with American Characteristics.",
+            title: "How We Work",
+            body: "Engagement starts with your actual workflows. We benchmark current performance, build training environments from your production patterns, fine-tune, evaluate, and deploy. Every iteration is measured. The models keep improving through autonomous self-improvement loops.",
           },
         ].map((item, i) => (
           <FadeSection key={i} delay={i * 0.08} style={{
@@ -260,10 +259,10 @@ function Thesis() {
 // ─── Proof Points ───
 function Proof() {
   const stats = [
-    { value: "100%", label: "File coverage", sub: "vs 89% baseline", context: "FastAPI codebase analysis" },
-    { value: "53%", label: "Cost reduction", sub: "$0.46 vs $0.99", context: "DeepRepo on FastAPI" },
-    { value: "+77%", label: "Retry intelligence", sub: "in one training cycle", context: "Mistral SFT loop" },
-    { value: "+22%", label: "Synthesis quality", sub: "across 7 iterations", context: "Autonomous overnight run" },
+    { value: "100%", label: "Complete Coverage", sub: "Nothing missed in analysis", context: "FastAPI codebase audit" },
+    { value: "53%", label: "Cost Savings", sub: "$0.46 vs $0.99 per analysis", context: "vs frontier model baseline" },
+    { value: "+77%", label: "Quality Improvement", sub: "in one training cycle", context: "Speed of model improvement" },
+    { value: "+22%", label: "Output Quality Gains", sub: "across 7 iterations", context: "Autonomous fine-tuning run" },
   ];
 
   return (
@@ -276,8 +275,14 @@ function Proof() {
             fontFamily: fonts.mono, fontSize: 10, color: C.textMuted,
             letterSpacing: "0.14em", textTransform: "uppercase",
           }}>
-            02 — Proof Points
+            02 — Results
           </span>
+          <p style={{
+            fontFamily: fonts.body, fontSize: 14, color: C.textSoft, margin: "12px 0 0",
+            fontWeight: 400,
+          }}>
+            Results from production deployments and controlled benchmarks.
+          </p>
         </FadeSection>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 1, marginTop: 32, background: C.border }}>
@@ -315,13 +320,13 @@ function Work() {
           fontFamily: fonts.mono, fontSize: 10, color: C.textMuted,
           letterSpacing: "0.14em", textTransform: "uppercase",
         }}>
-          03 — Work
+          03 — Platform & Case Studies
         </span>
         <h2 style={{
           fontFamily: fonts.display, fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 400,
           color: C.cream, lineHeight: 1.2, margin: "16px 0 48px", letterSpacing: "-0.015em",
         }}>
-          Open tools, real benchmarks.
+          What we've built.
         </h2>
       </FadeSection>
 
@@ -342,12 +347,12 @@ function Work() {
                 <span style={{
                   fontFamily: fonts.mono, fontSize: 9, color: C.accent, letterSpacing: "0.08em",
                   textTransform: "uppercase", border: `1px solid ${C.accent}30`, padding: "2px 8px", borderRadius: 2,
-                }}>Open Source</span>
+                }}>Core Platform</span>
               </div>
               <p style={{
                 fontFamily: fonts.body, fontSize: 15, color: C.textSoft, lineHeight: 1.7, margin: 0, maxWidth: 560,
               }}>
-                Multi-agent codebase analysis engine. A frontier model orchestrates a swarm of cheap sub-LLMs for deep code review, security audits, and architectural analysis. Achieves 100% file coverage at half the cost of single-model baselines.
+                Our multi-agent orchestration engine for deep codebase analysis. A frontier model coordinates specialized sub-agents for code review, security audits, and architectural analysis. Available as a CLI tool — deploy it on your own infrastructure.
               </p>
               <div style={{ display: "flex", gap: 20, marginTop: 16 }}>
                 {[
@@ -373,22 +378,22 @@ function Work() {
           }}>
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
-                <h3 style={{ fontFamily: fonts.display, fontSize: 26, color: C.cream, fontWeight: 400, margin: 0 }}>RLM Distiller</h3>
+                <h3 style={{ fontFamily: fonts.display, fontSize: 26, color: C.cream, fontWeight: 400, margin: 0 }}>Autonomous Model Improvement</h3>
                 <span style={{
                   fontFamily: fonts.mono, fontSize: 9, color: C.textMuted, letterSpacing: "0.08em",
                   textTransform: "uppercase", border: `1px solid ${C.border}`, padding: "2px 8px", borderRadius: 2,
-                }}>W&B Hackathon Winner</span>
+                }}>Case Study</span>
               </div>
               <p style={{
                 fontFamily: fonts.body, fontSize: 15, color: C.textSoft, lineHeight: 1.7, margin: 0, maxWidth: 560,
               }}>
-                Autonomous self-improvement loop that distills orchestration intelligence from Claude into Mistral Small 24B. 7 iterations, 875 W&B Weave traces, zero human intervention, $44 total cost. Retry intelligence improved 77% in a single training cycle.
+                We ran 7 iterations of autonomous fine-tuning overnight for $44. Orchestration intelligence from Claude was distilled into Mistral Small 24B with zero human intervention. Retry quality improved 77% in a single cycle. This is what we do for your models.
               </p>
               <div style={{ display: "flex", gap: 20, marginTop: 16 }}>
                 {[
                   { k: "Method", v: "QLoRA + Self-Improvement Loop" },
                   { k: "Runtime", v: "7h 27m autonomous" },
-                  { k: "Traces", v: "875 in W&B Weave" },
+                  { k: "Cost", v: "$44 total" },
                 ].map((t, j) => (
                   <span key={j} style={{ fontFamily: fonts.mono, fontSize: 11, color: C.textMuted }}>
                     <span style={{ color: C.textSoft }}>{t.k}:</span> {t.v}
@@ -408,16 +413,16 @@ function Work() {
           }}>
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
-                <h3 style={{ fontFamily: fonts.display, fontSize: 26, color: C.cream, fontWeight: 400, margin: 0 }}>Three-Way Security Audit</h3>
+                <h3 style={{ fontFamily: fonts.display, fontSize: 26, color: C.cream, fontWeight: 400, margin: 0 }}>Security Audit Benchmark</h3>
                 <span style={{
                   fontFamily: fonts.mono, fontSize: 9, color: C.textMuted, letterSpacing: "0.08em",
                   textTransform: "uppercase", border: `1px solid ${C.border}`, padding: "2px 8px", borderRadius: 2,
-                }}>In Progress</span>
+                }}>Benchmark</span>
               </div>
               <p style={{
                 fontFamily: fonts.body, fontSize: 15, color: C.textSoft, lineHeight: 1.7, margin: 0, maxWidth: 560,
               }}>
-                Head-to-head comparison of frontier Claude, base Qwen3-30B, and fine-tuned Qwen adapter on real codebase security audits. Structured JSON findings, adjudicated labels, and honest benchmarking of breadth-vs-depth tradeoffs.
+                Head-to-head comparison: frontier Claude vs. base Qwen3-30B vs. our fine-tuned Qwen adapter on real codebase security audits. Structured findings, adjudicated labels. Our fine-tuned open-source models compete with frontier on real security tasks.
               </p>
             </div>
             <span style={{ fontFamily: fonts.display, fontSize: 24, color: C.textMuted }}>◈</span>
@@ -437,13 +442,13 @@ function Writing() {
           fontFamily: fonts.mono, fontSize: 10, color: C.textMuted,
           letterSpacing: "0.14em", textTransform: "uppercase",
         }}>
-          04 — Writing
+          04 — Research & Insights
         </span>
         <h2 style={{
           fontFamily: fonts.display, fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 400,
           color: C.cream, lineHeight: 1.2, margin: "16px 0 48px", letterSpacing: "-0.015em",
         }}>
-          Thinking in public.
+          Research & Insights
         </h2>
       </FadeSection>
 
@@ -525,7 +530,7 @@ function Footer() {
               <p style={{
                 fontFamily: fonts.body, fontSize: 15, color: C.textSoft, lineHeight: 1.7, margin: 0,
               }}>
-                Whether you're exploring enterprise AI orchestration, interested in fine-tuning open-source models, or want to discuss the future of post-training, we'd like to hear from you.
+                We work with enterprises deploying multi-agent AI systems. Tell us about your use case — whether you're evaluating orchestration platforms, looking to fine-tune open-source models, or need to reduce your frontier model costs.
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 16 }}>
